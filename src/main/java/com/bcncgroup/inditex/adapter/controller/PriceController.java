@@ -36,15 +36,5 @@ public class PriceController {
         return ResponseEntity.ok(response);
     }
     
-    @GetMapping("/now")
-    public LocalDateTime getCurrentDateTime() {
-        return LocalDateTime.now();
-    }
-    
-    @GetMapping("/all-products-dates")
-    public ResponseEntity<List<Map<String, Object>>> getAllProductDates() {
-        List<Map<String, Object>> response = priceService.getAllProductDates();
-        return ResponseEntity.ok(response);
-    }
 
 }

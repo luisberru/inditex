@@ -35,25 +35,6 @@ public class PriceService {
         return priceRepository.findApplicablePrice(date, productId, brandId)
             .orElseThrow(() -> new PriceNotFoundException("Precio no encontrado"));
     }
-    
-    public List<Map<String, Object>> getAllProductDates() {
-        List<Price> prices = priceRepository.findAll();
-        List<Map<String, Object>> result = new ArrayList<>();
-
-        for (Price price : prices) {
-            Map<String, Object> item = new HashMap<>();
-            item.put("productId", price.getProductId());
-            item.put("brandId", price.getBrandId());
-            item.put("startDate", price.getStartDate());
-            item.put("endDate", price.getEndDate());
-            item.put("price", price.getPrice());
-            result.add(item);
-        }
-
-        return result;
-    }
-
-
 
 }
 

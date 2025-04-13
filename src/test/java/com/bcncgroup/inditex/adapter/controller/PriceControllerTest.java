@@ -1,4 +1,4 @@
-package com.bcncgroup.inditex.controller;
+package com.bcncgroup.inditex.adapter.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;

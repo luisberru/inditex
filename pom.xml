@@ -63,6 +63,36 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+			  <groupId>org.jacoco</groupId>
+			  <artifactId>jacoco-maven-plugin</artifactId>
+			  <version>0.8.10</version>
+			  <executions>
+			    <execution>
+			      <goals>
+			        <goal>prepare-agent</goal>
+			      </goals>
+			    </execution>
+			    <execution>
+			      <id>report</id>
+			      <phase>verify</phase>
+			      <goals>
+			        <goal>report</goal>
+			      </goals>
+			      <configuration>
+			        <excludes>
+			          <!-- Excluir todo lo que no sea controller -->
+			          <exclude>**/application/**</exclude>
+			          <exclude>**/domain/**</exclude>
+			          <exclude>**/infrastructure/**</exclude>
+			          <exclude>**/config/**</exclude>
+			          <exclude>**/adapter/controller/dto/**</exclude>	          
+			        </excludes>
+			      </configuration>
+			    </execution>
+			  </executions>
+			</plugin>
+
 		</plugins>
 	</build>
 

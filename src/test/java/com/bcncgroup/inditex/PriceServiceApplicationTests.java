@@ -10,4 +10,8 @@ class PriceServiceApplicationTests {
 	void contextLoads() {
 	}
 
+	@Test
+    void mainMethodTest() {
+        PriceServiceApplication.main(new String[] {});
+    }
 }
