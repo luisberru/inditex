@@ -1,4 +1,4 @@
-package com.bcncgroup.price_service.controller;
+package com.bcncgroup.inditex.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -17,7 +17,7 @@ class PriceControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    private final String url = "/api/prices";
+    private final String url = "/prices";
 
     @Test
     void testCase1() throws Exception {

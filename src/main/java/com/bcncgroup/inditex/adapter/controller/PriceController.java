@@ -1,4 +1,4 @@
-package com.bcncgroup.price_service.adapter.controller;
+package com.bcncgroup.inditex.adapter.controller;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bcncgroup.price_service.adapter.controller.dto.PriceResponseDto;
-import com.bcncgroup.price_service.application.service.PriceService;
-import com.bcncgroup.price_service.domain.model.Price;
+import com.bcncgroup.inditex.adapter.controller.dto.PriceResponseDto;
+import com.bcncgroup.inditex.application.service.PriceService;
+import com.bcncgroup.inditex.domain.model.Price;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/prices")
 public class PriceController {
 
     private final PriceService priceService;
@@ -26,7 +26,7 @@ public class PriceController {
         this.priceService = priceService;
     }
 
-    @GetMapping("/prices")
+    @GetMapping
     public ResponseEntity<PriceResponseDto> getPrice(
             @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date,
             @RequestParam("productId") Long productId,

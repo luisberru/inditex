@@ -1,4 +1,4 @@
-package com.bcncgroup.price_service.infrastructure.exception;
+package com.bcncgroup.inditex.infrastructure.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

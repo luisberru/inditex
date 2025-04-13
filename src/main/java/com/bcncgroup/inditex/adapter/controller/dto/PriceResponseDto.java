@@ -1,9 +1,9 @@
-package com.bcncgroup.price_service.adapter.controller.dto;
+package com.bcncgroup.inditex.adapter.controller.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-import com.bcncgroup.price_service.domain.model.Price;
+import com.bcncgroup.inditex.domain.model.Price;
 
 public class PriceResponseDto {
     private Long productId;

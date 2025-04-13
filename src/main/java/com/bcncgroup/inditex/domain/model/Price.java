@@ -1,4 +1,4 @@
-package com.bcncgroup.price_service.domain.model;
+package com.bcncgroup.inditex.domain.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

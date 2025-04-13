@@ -1,4 +1,4 @@
-package com.bcncgroup.price_service.application.service;
+package com.bcncgroup.inditex.application.service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -8,9 +8,9 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import com.bcncgroup.price_service.domain.model.Price;
-import com.bcncgroup.price_service.infrastructure.exception.PriceNotFoundException;
-import com.bcncgroup.price_service.infrastructure.repository.PriceRepository;
+import com.bcncgroup.inditex.domain.model.Price;
+import com.bcncgroup.inditex.infrastructure.exception.PriceNotFoundException;
+import com.bcncgroup.inditex.infrastructure.repository.PriceRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
