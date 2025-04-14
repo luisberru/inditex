@@ -5,6 +5,11 @@ import java.time.LocalDateTime;
 
 import com.bcncgroup.inditex.domain.model.Price;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class PriceResponseDto {
     private Long productId;
     private Long brandId;
@@ -13,8 +18,6 @@ public class PriceResponseDto {
     private LocalDateTime endDate;
     private BigDecimal price;
     private String currency;
-    
-    
     
 	public PriceResponseDto(Long productId, Long brandId, Integer priceList, LocalDateTime startDate,
 			LocalDateTime endDate, BigDecimal price, String currency) {
@@ -25,48 +28,6 @@ public class PriceResponseDto {
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.price = price;
-		this.currency = currency;
-	}
-	public Long getProductId() {
-		return productId;
-	}
-	public void setProductId(Long productId) {
-		this.productId = productId;
-	}
-	public Long getBrandId() {
-		return brandId;
-	}
-	public void setBrandId(Long brandId) {
-		this.brandId = brandId;
-	}
-	public Integer getPriceList() {
-		return priceList;
-	}
-	public void setPriceList(Integer priceList) {
-		this.priceList = priceList;
-	}
-	public LocalDateTime getStartDate() {
-		return startDate;
-	}
-	public void setStartDate(LocalDateTime startDate) {
-		this.startDate = startDate;
-	}
-	public LocalDateTime getEndDate() {
-		return endDate;
-	}
-	public void setEndDate(LocalDateTime endDate) {
-		this.endDate = endDate;
-	}
-	public BigDecimal getPrice() {
-		return price;
-	}
-	public void setPrice(BigDecimal price) {
-		this.price = price;
-	}
-	public String getCurrency() {
-		return currency;
-	}
-	public void setCurrency(String currency) {
 		this.currency = currency;
 	}
 

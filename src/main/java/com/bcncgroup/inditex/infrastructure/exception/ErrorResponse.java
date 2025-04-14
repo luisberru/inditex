@@ -1,18 +1,21 @@
 package com.bcncgroup.inditex.infrastructure.exception;
 
-public class ErrorResponse {
-    private String message;
+import java.time.LocalDateTime;
+import java.util.Map;
 
-    public ErrorResponse(String message) {
-        this.message = message;
+public record ErrorResponse(
+    String message,
+    int status,
+    LocalDateTime timestamp,
+    Map<String, String> errors) {
+	
+
+    public ErrorResponse(String message, int status) {
+        this(message, status, LocalDateTime.now(), null);
     }
 
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
+	public ErrorResponse(String message, int status, Map<String, String> errors) {
+		 this(message, status, LocalDateTime.now(), errors);
 	}
 
    

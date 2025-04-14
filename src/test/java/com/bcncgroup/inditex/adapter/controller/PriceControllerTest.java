@@ -70,4 +70,13 @@ class PriceControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.priceList").value(4));
     }
+    
+    @Test
+    void testCase6() throws Exception {
+        mockMvc.perform(get(url)
+                        .param("date", "2020-06-13T10:00:00")
+                        .param("productId", "35455")
+                        .param("brandId", "1"))
+                .andExpect(status().isNotFound());
+    }
 }

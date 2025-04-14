@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.bcncgroup.inditex.adapter.controller.dto.PriceRequestDto;
 import com.bcncgroup.inditex.domain.model.Price;
 import com.bcncgroup.inditex.infrastructure.exception.PriceNotFoundException;
 import com.bcncgroup.inditex.infrastructure.repository.PriceRepository;
@@ -26,13 +27,13 @@ public class PriceService {
         this.priceRepository = priceRepository;
     }
 
-    public Price getPrice(LocalDateTime date, Long productId, Long brandId) {
+    public Price getPrice(PriceRequestDto request) {
         logger.info("Recibiendo solicitud para buscar precio con:");
-        logger.info("Fecha: {}", date);
-        logger.info("ID de Producto: {}", productId);
-        logger.info("ID de Marca: {}", brandId);
+        logger.info("Fecha: {}", request.getDate());
+        logger.info("ID de Producto: {}", request.getProductId());
+        logger.info("ID de Marca: {}", request.getBrandId());
 
-        return priceRepository.findApplicablePrice(date, productId, brandId)
+        return priceRepository.findApplicablePrice(request.getDate(), request.getProductId(), request.getBrandId())
             .orElseThrow(() -> new PriceNotFoundException("Precio no encontrado"));
     }
 
