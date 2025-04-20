@@ -3,17 +3,17 @@ spring:
     name: price-service
   sql:
     init:
-      mode: always       # Para ejecutar siempre los scripts
+      mode: always
       schema-locations: classpath:schema.sql
       data-locations: classpath:data.sql
   datasource:
-    url: jdbc:h2:mem:testdb    # O la URL que estés usando (H2, PostgreSQL, MySQL, etc.)
+    url: jdbc:h2:mem:testdb
     driver-class-name: org.h2.Driver
     username: sa
     password:
   jpa:
     hibernate:
-      ddl-auto: none    # Muy importante: "none" para que no interfiera con schema.sql
+      ddl-auto: none
   h2:
     console:
       enabled: true

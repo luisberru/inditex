@@ -1,11 +1,5 @@
 package com.bcncgroup.inditex.application.service;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.stereotype.Service;
 
 import com.bcncgroup.inditex.adapter.controller.dto.PriceRequestDto;
@@ -28,13 +22,20 @@ public class PriceService {
     }
 
     public Price getPrice(PriceRequestDto request) {
+        logRequestDetails(request);
+        return findApplicablePrice(request);
+    }
+
+    private void logRequestDetails(PriceRequestDto request) {
         logger.info("Recibiendo solicitud para buscar precio con:");
         logger.info("Fecha: {}", request.getDate());
         logger.info("ID de Producto: {}", request.getProductId());
         logger.info("ID de Marca: {}", request.getBrandId());
+    }
 
+    private Price findApplicablePrice(PriceRequestDto request) {
         return priceRepository.findApplicablePrice(request.getDate(), request.getProductId(), request.getBrandId())
-            .orElseThrow(() -> new PriceNotFoundException("Precio no encontrado"));
+                .orElseThrow(() -> new PriceNotFoundException("Precio no encontrado"));
     }
 
 }
