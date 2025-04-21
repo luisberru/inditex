@@ -3,16 +3,16 @@
 API REST desarrollada en Java 17 con Spring Boot para consultar precios aplicables de productos según reglas de negocio.
 
 ## Tabla de Contenidos
-1. [Descripción](#1.-descripción)
-2. [Tecnologías](#2.-tecnologías-y-herramientas)
-3. [Instalación](#3.-instalación)
-4. [Ejecución](#4.-ejecución)
-5. [Endpoints](#5.-endpoints)
-6. [Arquitectura](#6.-arquitectura-hexagonal)
-7. [Documentación](#7.-documentacion-opeapi)
-8. [Pruebas](#8.-tests)
-9. [Contribuciones](#9.-contribuciones)
-10. [Autor](#10.-autor)
+1. [Descripción](#1-descripción)
+2. [Tecnologías](#2-tecnologías-y-herramientas)
+3. [Instalación](#3-instalación)
+4. [Ejecución](#4-ejecución)
+5. [Endpoints](#5-endpoints)
+6. [Arquitectura](#6-arquitectura-hexagonal)
+7. [Documentación](#7-documentacion-opeapi)
+8. [Pruebas](#8-tests)
+9. [Contribuciones](#9-contribuciones)
+10. [Autor](#10-autor)
 
 ## 1. Descripción
 Permite consultar el precio aplicable de un producto en una fecha y hora determinada, considerando reglas de prioridad y validez de tarifas.
@@ -65,8 +65,9 @@ Ejemplo:
 ```bash
 GET /prices?applicationDate=2020-06-14T10:00:00&productId=35455&brandId=1
 ```
-```json
 Respuesta:
+
+```json
 {
   "productId": 35455,
   "brandId": 1,
