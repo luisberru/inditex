@@ -12,6 +12,10 @@ import com.bcncgroup.inditex.adapter.controller.dto.PriceResponseDto;
 import com.bcncgroup.inditex.application.service.PriceService;
 import com.bcncgroup.inditex.domain.model.Price;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 
 @RestController
@@ -23,7 +27,15 @@ public class PriceController {
     public PriceController(PriceService priceService) {
         this.priceService = priceService;
     }
-
+    /**
+     * Obtiene el precio aplicable para un producto y marca en una fecha específica.
+     *
+     * @param request Objeto que contiene la fecha, ID de producto y ID de marca.
+     * @return Precio aplicable en formato JSON.
+     */
+	@Operation(summary = "Obtener precio aplicable", description = "Obtiene el precio aplicable para un producto y marca en una fecha específica.", responses = {
+			@ApiResponse(responseCode = "200", description = "Precio encontrado", content = @Content(schema = @Schema(implementation = PriceResponseDto.class))),
+			@ApiResponse(responseCode = "404", description = "Precio no encontrado") })
     @GetMapping
     public ResponseEntity<PriceResponseDto> getPrice(@Valid @ModelAttribute PriceRequestDto request) {
         Price price = priceService.getPrice(request);
