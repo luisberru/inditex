@@ -1,83 +1,72 @@
 # Pricing Service - Product Tariff API
 
-Este proyecto es una API REST desarrollada en Java 17 con Spring Boot, siguiendo principios de arquitectura hexagonal, DDD, Clean Code y SOLID, que permite obtener el precio aplicable de un producto según una fecha, identificador de producto e identificador de cadena.
+API REST desarrollada en Java 17 con Spring Boot para consultar precios aplicables de productos según reglas de negocio.
 
-## 💡 Descripción
+## Tabla de Contenidos
+1. [Descripción](#1.-descripción)
+2. [Tecnologías](#2.-tecnologías-y-herramientas)
+3. [Instalación](#3.-instalación)
+4. [Ejecución](#4.-ejecución)
+5. [Endpoints](#5.-endpoints)
+6. [Arquitectura](#6.-arquitectura-hexagonal)
+7. [Documentación](#7.-documentacion-opeapi)
+8. [Pruebas](#8.-tests)
+9. [Contribuciones](#9.-contribuciones)
+10. [Autor](#10.-autor)
 
+## 1. Descripción
 Permite consultar el precio aplicable de un producto en una fecha y hora determinada, considerando reglas de prioridad y validez de tarifas.
 
-## 🌐 Tecnologías y herramientas
-
+## 2. Tecnologías y herramientas
 - Java 17
-
 - Spring Boot 3
-
 - Maven
-
 - H2 (base de datos en memoria)
-
 - JPA (Hibernate)
-
 - JUnit 5
-
 - Jacoco (cobertura de tests)
+- OpenAPI (OAS)
 
-## ⚖️ Arquitectura hexagonal
+## 3. Instalación
 
-- domain: contiene las entidades y lógica de negocio pura.
+1. Clona el repositorio:
 
-- application: contiene los casos de uso.
+```bash
+git clone https://github.com/luisberru/inditex.git
+cd inditex
+  ```
+2. Instala las dependencias:
 
-- adapter: controladores REST.
-
-- infrastructure: implementaciones de persistencia (JPA).
-
-- config: configuraciones de Spring.
-
-## 🎯 Patrones aplicados
-
-- DDD: entidad Price, PriceService como caso de uso.
-
-- SOLID: principios aplicados en la separación de responsabilidades.
-
-- Clean Code: nombres claros, métodos pequeños, sin duplicidad.
-
-## 📁 Estructura del proyecto
+```bash
+mvn clean install  
 ```
-src/main/java/com/bcncgroup/inditex
-├── domain
-│   └── model
-├── application
-│   └── service
-├── adapter
-│   ├── controller
-│   └── dto
-├── infrastructure
-│   ├── repository
-│   └── exception
-└── config
+## 4. Ejecución
+
+Ejecuta la aplicación:
+```bash
+mvn spring-boot:run
 ```
-## 📆 Endpoints
+Accede a la API en http://localhost:8080.
+
+## 5. Endpoints
 
 Obtener precio aplicable
 
-- GET /prices
+`GET /prices`
 
 Parámetros:
 
 - applicationDate: Fecha y hora (ej: 2020-06-14T10:00:00)
-
 - productId: ID del producto
-
 - brandId: ID de la cadena
 
 Ejemplo:
+
 ```bash
 GET /prices?applicationDate=2020-06-14T10:00:00&productId=35455&brandId=1
 ```
-
-Respuesta:
 ```json
+Respuesta:
 {
   "productId": 35455,
   "brandId": 1,
@@ -88,50 +77,50 @@ Respuesta:
   "currency": "EUR"
 }
 ```
+## 6. Arquitectura hexagonal
 
-## ⚠️ Códigos de error HTTP
+El proyecto sigue principios de arquitectura hexagonal:
 
-- 200 OK: Respuesta correcta
+- domain: Entidades y lógica de negocio.
+- application: Casos de uso.
+- adapter: Controladores REST.
+- infrastructure: Persistencia (JPA).
+- config: Configuraciones de Spring.
 
-- 400 BAD REQUEST: Parámetros inválidos
+## 7. Documentación OpenAPI
 
-- 404 NOT FOUND: No se encontró tarifa para los parámetros dados
+La API cuenta con documentación generada automáticamente utilizando **Springdoc OpenAPI**.
 
-- 500 INTERNAL SERVER ERROR: Error no controlado
+### Acceso a la documentación
+- **Swagger UI**: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+- **Especificación OpenAPI**: [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
 
-## 🔒 Control de errores
+## 8. Tests
+Cobertura: 100% del core DDD con Jacoco.
 
-`@ControllerAdvice` global con clases personalizadas para errores.
-
-## ✅ Tests
-
-5 tests obligatorios cubiertos:
-
-- 14/06 a las 10:00
-
-- 14/06 a las 16:00
-
-- 14/06 a las 21:00
-
-- 15/06 a las 10:00
-
-- 16/06 a las 21:00
-
-Test de integración incluido
-
-100% cobertura del core DDD con Jacoco
-
-## 🎯 Cobertura de código
-
-Ejecutar:
+Ejecución:
 
 ```bash
 mvn clean verify
 ```
+Reporte: target/site/jacoco/index.html.
 
-Ver reporte: `target/site/jacoco/index.html`
+## 9. Contribuciones
 
+Para contribuir al proyecto, sigue estos pasos:
 
-## 🙋 Autor
+Crea una rama para tu feature:
+```bash
+git checkout -b feature/nueva-funcionalidad
+```
+Realiza tus cambios y haz un commit:
+```bash
+git commit -m "Agrega nueva funcionalidad"
+```
+Envía un pull request.
+
+Sigue el flujo de trabajo `GitFlow` integrando las ramas primero en `develop` y luego en `main`.
+
+## 10. Autor
 
 Luis Gabriel Berru Aguilar
