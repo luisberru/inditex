@@ -1,0 +1,123 @@
+{
+	"info": {
+		"_postman_id": "de125268-296d-4af0-8e07-33d15c79d062",
+		"name": "Inditex",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7817197"
+	},
+	"item": [
+		{
+			"name": "Api-docs - Local",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/v3/api-docs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v3",
+						"api-docs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Prices - Local",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/prices?date=2020-06-14T01:00:00&productId=35455&brandId=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"prices"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2020-06-14T01:00:00"
+						},
+						{
+							"key": "productId",
+							"value": "35455"
+						},
+						{
+							"key": "brandId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Api-docs - Google Cloud",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://price-service-java-215191314670.us-central1.run.app/v3/api-docs",
+					"protocol": "https",
+					"host": [
+						"price-service-java-215191314670",
+						"us-central1",
+						"run",
+						"app"
+					],
+					"path": [
+						"v3",
+						"api-docs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Prices - Google Cloud",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://price-service-java-215191314670.us-central1.run.app/prices?date=2020-06-14T01:00:00&productId=35455&brandId=1",
+					"protocol": "https",
+					"host": [
+						"price-service-java-215191314670",
+						"us-central1",
+						"run",
+						"app"
+					],
+					"path": [
+						"prices"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2020-06-14T01:00:00"
+						},
+						{
+							"key": "productId",
+							"value": "35455"
+						},
+						{
+							"key": "brandId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

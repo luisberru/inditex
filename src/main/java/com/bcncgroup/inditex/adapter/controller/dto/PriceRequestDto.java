@@ -1,9 +1,7 @@
 package com.bcncgroup.inditex.adapter.controller.dto;
 
 import java.time.LocalDateTime;
-
-import org.springframework.format.annotation.DateTimeFormat;
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -14,11 +12,14 @@ import lombok.Setter;
 @Setter
 public class PriceRequestDto {
 
+	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+	@Schema(
+	    type = "string",
+	    pattern = "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}$",
+	    example = "2020-06-14T01:00:00",
+	    description = "Fecha de la consulta en formato yyyy-MM-dd'T'HH:mm:ss"
+	)
 	@NotNull(message = "La fecha es obligatoria")
-	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-	@Schema(description = "Fecha de la consulta en formato YYYY-MM-DDTHH:mm:ss", 
-    example = "2023-01-01T10:00:00", 
-    pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	private LocalDateTime date;
 
 	@NotNull(message = "El productId es obligatorio")
