@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 public class OpenApiConfig {
 
     @Bean
-    public OpenAPI customOpenAPI() {
+    OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
                         .title("Price Service API")
@@ -18,7 +18,7 @@ public class OpenApiConfig {
     }
 
     @Bean
-    public org.springframework.web.servlet.config.annotation.WebMvcConfigurer corsConfigurer() {
+    org.springframework.web.servlet.config.annotation.WebMvcConfigurer corsConfigurer() {
         return new org.springframework.web.servlet.config.annotation.WebMvcConfigurer() {
             @Override
             public void addCorsMappings(org.springframework.web.servlet.config.annotation.CorsRegistry registry) {

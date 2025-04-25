@@ -2,11 +2,8 @@ package com.bcncgroup.inditex.adapters.inbound.rest.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Optional;
-
 import com.bcncgroup.inditex.adapters.outbound.persistence.entity.PriceEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
-
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;

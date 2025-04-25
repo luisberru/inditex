@@ -1,18 +1,13 @@
 package com.bcncgroup.inditex.domain.service;
 
 import org.springframework.stereotype.Service;
-
-import com.bcncgroup.inditex.adapters.inbound.rest.dto.PriceRequestDto;
-import com.bcncgroup.inditex.adapters.outbound.persistence.entity.PriceEntity;
 import com.bcncgroup.inditex.domain.exception.PriceNotFoundException;
 import com.bcncgroup.inditex.domain.model.Price;
 import com.bcncgroup.inditex.domain.port.inbound.GetPriceUseCase;
 import com.bcncgroup.inditex.domain.port.outbound.PriceRepository;
-
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.Optional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -5,13 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.bcncgroup.inditex.adapters.inbound.rest.dto.PriceRequestDto;
 import com.bcncgroup.inditex.adapters.inbound.rest.dto.PriceResponseDto;
 import com.bcncgroup.inditex.adapters.inbound.rest.mapper.PriceRestMapper;
-import com.bcncgroup.inditex.adapters.outbound.persistence.entity.PriceEntity;
 import com.bcncgroup.inditex.domain.service.PriceService;
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
