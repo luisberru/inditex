@@ -1,4 +1,4 @@
-package com.bcncgroup.inditex.adapter.controller.dto;
+package com.bcncgroup.inditex.adapters.inbound.rest.dto;
 
 import java.time.LocalDateTime;
 import com.fasterxml.jackson.annotation.JsonFormat;

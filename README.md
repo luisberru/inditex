@@ -81,15 +81,94 @@ Respuesta:
   "currency": "EUR"
 }
 ```
+---
+
 ## 6. Arquitectura hexagonal
 
-El proyecto sigue principios de arquitectura hexagonal:
+Este proyecto implementa una **arquitectura hexagonal** (también conocida como _Ports and Adapters_) para desacoplar el núcleo de negocio de los detalles técnicos como bases de datos, APIs o frameworks.
 
-- domain: Entidades y lógica de negocio.
-- application: Casos de uso.
-- adapter: Controladores REST.
-- infrastructure: Persistencia (JPA).
-- config: Configuraciones de Spring.
+### Objetivo
+
+Asegurar que el dominio del negocio se mantenga **independiente, testable y reutilizable**, separando claramente la lógica de negocio de los mecanismos de entrada/salida.
+
+---
+
+### Estructura de paquetes
+```graphql
+com.bcncgroup.inditex
+├── adapters                        # Adaptadores que conectan con el exterior
+│   ├── inbound                     # Entradas al sistema (ej: controladores REST)
+│   │   └── rest
+│   │       ├── advice             # Manejo global de excepciones
+│   │       ├── controller         # Controladores REST
+│   │       ├── dto                # Objetos de transferencia (Request/Response)
+│   │       └── mapper             # Mapeadores entre DTOs y el dominio
+│   └── outbound                    # Salidas del sistema (persistencia, servicios externos)
+│       └── persistence
+│           ├── entity            # Entidades JPA
+│           ├── mapper            # Mapeadores entre entidades y el dominio
+│           └── repository        # Implementaciones JPA de los puertos outbound
+├── config                          # Configuración general (OpenAPI, Beans, etc.)
+├── domain                          # Núcleo del dominio (no depende de otras capas)
+│   ├── exception                  # Excepciones del dominio
+│   ├── model                      # Modelos del dominio
+│   ├── port                       # Interfaces (puertos) del dominio
+│   │   ├── inbound               # Casos de uso que el exterior puede invocar
+│   │   └── outbound              # Interfaces requeridas por el dominio (ej: repositorio)
+│   └── service                    # Implementación de los casos de uso
+└── PriceServiceApplication.java    # Clase principal Spring Boot
+```
+
+### Flujo de ejecución
+
+1. El adaptador inbound (REST Controller) recibe una solicitud externa.
+2. Llama a un **puerto inbound**, que representa un caso de uso del dominio.
+3. El servicio de dominio ejecuta la lógica de negocio.
+4. Si necesita acceder a datos, usa un **puerto outbound** (ej: `PriceRepository`).
+5. Un adaptador outbound implementa ese puerto y accede a la base de datos.
+6. El resultado vuelve al adaptador inbound, que lo transforma en un DTO y lo devuelve al cliente.
+
+
+
+### Ventajas
+
+- Separación clara de responsabilidades
+- Dominio desacoplado de frameworks y tecnología
+- Fácil de testear sin necesidad de levantar Spring
+- Adaptable a múltiples canales: REST, Kafka, CLI, etc.
+- Facilita el mantenimiento y evolución de la aplicación
+
+
+
+### Testing
+
+- El dominio se prueba con pruebas unitarias puras (sin contexto Spring)
+- Los adaptadores se testean por separado mediante pruebas de integración
+- La lógica de negocio es independiente del transporte, persistencia o formato
+
+
+
+### Ejemplo de componentes clave
+
+| Tipo           | Clase                                | Descripción                                        |
+|----------------|--------------------------------------|----------------------------------------------------|
+| Entidad        | `Price`                              | Modelo del dominio                                |
+| Puerto inbound | `GetPriceUseCase`                    | Interfaz de uso expuesta por el dominio           |
+| Puerto outbound| `PriceRepository`                    | Interfaz de persistencia esperada por el dominio  |
+| Servicio       | `PriceService`                       | Implementación de los casos de uso del dominio    |
+| Adaptador REST | `PriceController`                    | Expone los endpoints públicos                     |
+| Adaptador JPA  | `PriceJpaRepository` + `PriceMapper` | Persiste entidades mediante JPA                   |
+
+
+
+### Buenas prácticas seguidas
+
+- No se exponen clases de infraestructura desde el dominio
+- Las entidades JPA (`PriceEntity`) no se usan fuera del adaptador de persistencia
+- Cada capa tiene sus propios modelos (DTOs, entidades, modelos de dominio)
+- Se usa mapeo explícito entre capas
+
+---
 
 ## 7. Documentación OpenAPI
 
