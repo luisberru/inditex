@@ -1,9 +1,10 @@
-package com.bcncgroup.inditex.adapter.controller.dto;
+package com.bcncgroup.inditex.adapters.inbound.rest.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
-import com.bcncgroup.inditex.domain.model.Price;
+import com.bcncgroup.inditex.adapters.outbound.persistence.entity.PriceEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -47,7 +48,7 @@ public class PriceResponseDto {
 		this.currency = currency;
 	}
 
-	public static PriceResponseDto from(Price price) {
+	public static PriceResponseDto from(PriceEntity price) {
 	    return new PriceResponseDto(
 	        price.getProductId(),
 	        price.getBrandId(),

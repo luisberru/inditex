@@ -1,4 +1,4 @@
-package com.bcncgroup.inditex.adapter.controller;
+package com.bcncgroup.inditex.integration;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

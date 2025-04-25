@@ -1,4 +1,4 @@
-package com.bcncgroup.inditex.infrastructure.exception;
+package com.bcncgroup.inditex.adapters.inbound.rest.advice;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +13,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.bcncgroup.inditex.adapters.inbound.rest.dto.ErrorResponse;
+import com.bcncgroup.inditex.domain.exception.PriceNotFoundException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 
 @RestControllerAdvice

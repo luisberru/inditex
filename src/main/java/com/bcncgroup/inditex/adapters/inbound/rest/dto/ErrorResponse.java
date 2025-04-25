@@ -1,4 +1,4 @@
-package com.bcncgroup.inditex.infrastructure.exception;
+package com.bcncgroup.inditex.adapters.inbound.rest.dto;
 
 import java.time.LocalDateTime;
 import java.util.Map;
