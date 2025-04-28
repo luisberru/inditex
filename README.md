@@ -32,13 +32,14 @@ Permite consultar el precio aplicable de un producto en una fecha y hora determi
 
 ## 3. Instalación
 
-1. Clona el repositorio:
+3.1. Clona el repositorio:
 
 ```bash
 git clone https://github.com/luisberru/inditex.git
 cd inditex
-  ```
-2. Instala las dependencias:
+ ```
+
+3.2. Instala las dependencias:
 
 ```bash
 mvn clean install  
@@ -96,39 +97,42 @@ Asegurar que el dominio del negocio se mantenga **independiente, testable y reut
 ### Estructura de paquetes
 ```graphql
 com.bcncgroup.inditex
-├── adapters                        # Adaptadores que conectan con el exterior
-│   ├── inbound                     # Entradas al sistema (ej: controladores REST)
-│   │   └── rest
-│   │       ├── advice             # Manejo global de excepciones
-│   │       ├── controller         # Controladores REST
-│   │       ├── dto                # Objetos de transferencia (Request/Response)
-│   │       └── mapper             # Mapeadores entre DTOs y el dominio
-│   └── outbound                    # Salidas del sistema (persistencia, servicios externos)
-│       └── persistence
-│           ├── entity            # Entidades JPA
-│           ├── mapper            # Mapeadores entre entidades y el dominio
-│           └── repository        # Implementaciones JPA de los puertos outbound
-├── config                          # Configuración general (OpenAPI, Beans, etc.)
-├── domain                          # Núcleo del dominio (no depende de otras capas)
-│   ├── exception                  # Excepciones del dominio
-│   ├── model                      # Modelos del dominio
-│   ├── port                       # Interfaces (puertos) del dominio
-│   │   ├── inbound               # Casos de uso que el exterior puede invocar
-│   │   └── outbound              # Interfaces requeridas por el dominio (ej: repositorio)
-│   └── service                    # Implementación de los casos de uso
-└── PriceServiceApplication.java    # Clase principal Spring Boot
+├── application                    # Capa de aplicación (casos de uso)
+│   └── service                    # Implementaciones de casos de uso
+├── domain                          # Capa de dominio (núcleo puro)
+│   ├── exception                  # Excepciones específicas del dominio
+│   ├── model                      # Entidades y Value Objects del dominio
+│   └── port                       # Puertos (interfaces) que expone o necesita el dominio
+│       ├── inbound                # Interfaces que define el dominio para entrada
+│       └── outbound               # Interfaces que define el dominio para salida
+├── infrastructure                 # Adaptadores e infraestructura técnica
+│   ├── adapter                    # Adaptadores que conectan hacia dentro o fuera
+│   │   ├── inbound                 # Entradas al sistema
+│   │   │   └── rest
+│   │   │       ├── advice         # Manejo global de excepciones HTTP
+│   │   │       ├── controller     # Controladores REST
+│   │   │       ├── dto            # Objetos de transferencia Request/Response
+│   │   │       └── mapper         # Conversores entre DTO y modelo de dominio
+│   │   └── outbound                # Salidas del sistema
+│   │       └── persistence
+│   │           ├── entity        # Entidades JPA (persistencia)
+│   │           ├── mapper        # Conversores entre entidad JPA y dominio
+│   │           └── repository    # Implementaciones de los puertos de salida
+│   └── config                     # Configuraciones técnicas de la app (Beans, OpenAPI, etc.)
+└── PriceServiceApplication.java   # Clase principal de Spring Boot
+
 ```
 
 ### Flujo de ejecución
 
-1. El adaptador inbound (REST Controller) recibe una solicitud externa.
-2. Llama a un **puerto inbound**, que representa un caso de uso del dominio.
-3. El servicio de dominio ejecuta la lógica de negocio.
-4. Si necesita acceder a datos, usa un **puerto outbound** (ej: `PriceRepository`).
-5. Un adaptador outbound implementa ese puerto y accede a la base de datos.
-6. El resultado vuelve al adaptador inbound, que lo transforma en un DTO y lo devuelve al cliente.
-
-
+1. El adaptador inbound (por ejemplo, un REST Controller) recibe una solicitud externa.
+2. El adaptador inbound invoca un puerto inbound (una interfaz de caso de uso definida en el dominio).
+3. La capa de aplicación implementa este puerto a través de un servicio de aplicación, el cual coordina la lógica de negocio.
+4. El servicio de aplicación opera sobre modelos del dominio y, si necesita datos externos (por ejemplo, persistencia), invoca un puerto outbound.
+5. Un adaptador outbound implementa el puerto outbound y se encarga de acceder a sistemas externos (como bases de datos o APIs).
+6. El resultado obtenido pasa nuevamente al servicio de aplicación.
+7. El adaptador inbound transforma el resultado del dominio en un DTO adecuado para exponerlo al cliente.
+8. Finalmente, se devuelve la respuesta al solicitante.
 
 ### Ventajas
 
@@ -147,19 +151,16 @@ com.bcncgroup.inditex
 - La lógica de negocio es independiente del transporte, persistencia o formato
 
 
-
 ### Ejemplo de componentes clave
 
-| Tipo           | Clase                                | Descripción                                        |
-|----------------|--------------------------------------|----------------------------------------------------|
-| Entidad        | `Price`                              | Modelo del dominio                                |
-| Puerto inbound | `GetPriceUseCase`                    | Interfaz de uso expuesta por el dominio           |
-| Puerto outbound| `PriceRepository`                    | Interfaz de persistencia esperada por el dominio  |
-| Servicio       | `PriceService`                       | Implementación de los casos de uso del dominio    |
-| Adaptador REST | `PriceController`                    | Expone los endpoints públicos                     |
-| Adaptador JPA  | `PriceJpaRepository` + `PriceMapper` | Persiste entidades mediante JPA                   |
-
-
+| Tipo                   | Clase                                | Descripción                                      |
+|-------------------------|--------------------------------------|--------------------------------------------------|
+| Entidad                 | `Price`                             | Modelo del dominio que representa un precio.     |
+| Puerto inbound          | `GetPriceUseCase`                   | Interfaz que expone el caso de uso para ser invocado externamente. |
+| Puerto outbound         | `PriceRepository`                   | Interfaz que define las operaciones de persistencia requeridas por el dominio. |
+| Servicio de aplicación  | `PriceService`                      | Implementación de los casos de uso, coordinando entidades y puertos. |
+| Adaptador REST          | `PriceController`                   | Expone los endpoints públicos mediante REST.     |
+| Adaptador JPA           | `PriceJpaRepository` + `PriceMapper` | Implementan la persistencia de datos utilizando JPA y mapeo a dominio. |
 
 ### Buenas prácticas seguidas
 
