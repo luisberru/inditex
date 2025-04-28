@@ -95,11 +95,8 @@
 			      <configuration>
 			        <excludes>
 			          <!-- Excluir todo lo que no sea controller -->
-			          <exclude>**/application/**</exclude>
-			          <exclude>**/domain/**</exclude>
-			          <exclude>**/infrastructure/**</exclude>
+			          <exclude>**/adapters/**</exclude>
 			          <exclude>**/config/**</exclude>
-			          <exclude>**/adapter/controller/dto/**</exclude>	          
 			        </excludes>
 			      </configuration>
 			    </execution>
