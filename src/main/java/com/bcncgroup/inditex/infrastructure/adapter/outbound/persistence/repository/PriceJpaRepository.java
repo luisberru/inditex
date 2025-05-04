@@ -1,8 +1,9 @@
 package com.bcncgroup.inditex.infrastructure.adapter.outbound.persistence.repository;
 
 import com.bcncgroup.inditex.infrastructure.adapter.outbound.persistence.mapper.PriceJpaMapper;
+import com.bcncgroup.inditex.application.port.outbound.PriceRepository;
 import com.bcncgroup.inditex.domain.model.Price;
-import com.bcncgroup.inditex.domain.port.outbound.PriceRepository;
+
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;

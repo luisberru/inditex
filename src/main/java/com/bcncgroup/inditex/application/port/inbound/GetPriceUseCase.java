@@ -1,4 +1,4 @@
-package com.bcncgroup.inditex.domain.port.inbound;
+package com.bcncgroup.inditex.application.port.inbound;
 
 import com.bcncgroup.inditex.domain.model.Price;
 import java.time.LocalDateTime;
