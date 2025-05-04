@@ -98,13 +98,13 @@ Asegurar que el dominio del negocio se mantenga **independiente, testable y reut
 ```graphql
 com.bcncgroup.inditex
 ├── application                    # Capa de aplicación (casos de uso)
-│   └── service                    # Implementaciones de casos de uso
+│   ├── port
+│   │   ├── inbound               # Interfaces que definen los casos de uso
+│   │   └── outbound              # Interfaces requeridas (ej: repositorios)
+│   └── service                   # Implementaciones de los casos de uso
 ├── domain                          # Capa de dominio (núcleo puro)
 │   ├── exception                  # Excepciones específicas del dominio
-│   ├── model                      # Entidades y Value Objects del dominio
-│   └── port                       # Puertos (interfaces) que expone o necesita el dominio
-│       ├── inbound                # Interfaces que define el dominio para entrada
-│       └── outbound               # Interfaces que define el dominio para salida
+│   └──model                      # Entidades y Value Objects del dominio
 ├── infrastructure                 # Adaptadores e infraestructura técnica
 │   ├── adapter                    # Adaptadores que conectan hacia dentro o fuera
 │   │   ├── inbound                 # Entradas al sistema
@@ -125,14 +125,15 @@ com.bcncgroup.inditex
 
 ### Flujo de ejecución
 
-1. El adaptador inbound (por ejemplo, un REST Controller) recibe una solicitud externa.
-2. El adaptador inbound invoca un puerto inbound (una interfaz de caso de uso definida en el dominio).
-3. La capa de aplicación implementa este puerto a través de un servicio de aplicación, el cual coordina la lógica de negocio.
-4. El servicio de aplicación opera sobre modelos del dominio y, si necesita datos externos (por ejemplo, persistencia), invoca un puerto outbound.
-5. Un adaptador outbound implementa el puerto outbound y se encarga de acceder a sistemas externos (como bases de datos o APIs).
-6. El resultado obtenido pasa nuevamente al servicio de aplicación.
-7. El adaptador inbound transforma el resultado del dominio en un DTO adecuado para exponerlo al cliente.
-8. Finalmente, se devuelve la respuesta al solicitante.
+1. El adaptador inbound (por ejemplo, un REST Controller) recibe una solicitud externa del cliente.
+2. El adaptador invoca un puerto inbound, que es una interfaz ubicada en la capa de aplicación que representa un caso de uso.
+3. Una clase de servicio de aplicación implementa este puerto y coordina la ejecución de la lógica necesaria.
+4. El servicio de aplicación utiliza modelos del dominio para ejecutar reglas de negocio puras.
+5. Si necesita datos externos (como persistencia o servicios de terceros), invoca un puerto outbound, también definido en la capa de aplicación.
+6. Un adaptador outbound implementa este puerto outbound y se encarga de acceder a sistemas externos como bases de datos o APIs.
+7. El servicio de aplicación recibe la información externa y produce un resultado de acuerdo a la lógica de negocio.
+8. El adaptador inbound transforma el resultado en un DTO adecuado para su exposición.
+9. Finalmente, se devuelve la respuesta al solicitante en el formato esperado
 
 ### Ventajas
 
@@ -156,8 +157,8 @@ com.bcncgroup.inditex
 | Tipo                   | Clase                                | Descripción                                      |
 |-------------------------|--------------------------------------|--------------------------------------------------|
 | Entidad                 | `Price`                             | Modelo del dominio que representa un precio.     |
-| Puerto inbound          | `GetPriceUseCase`                   | Interfaz que expone el caso de uso para ser invocado externamente. |
-| Puerto outbound         | `PriceRepository`                   | Interfaz que define las operaciones de persistencia requeridas por el dominio. |
+| Puerto inbound          | `GetPriceUseCase`                   | Interfaz de la capa de aplicación que expone un caso de uso del sistema. |
+| Puerto outbound         | `PriceRepository`                   | Interfaz de la capa de aplicación que define las operaciones requeridas. |
 | Servicio de aplicación  | `PriceService`                      | Implementación de los casos de uso, coordinando entidades y puertos. |
 | Adaptador REST          | `PriceController`                   | Expone los endpoints públicos mediante REST.     |
 | Adaptador JPA           | `PriceJpaRepository` + `PriceMapper` | Implementan la persistencia de datos utilizando JPA y mapeo a dominio. |

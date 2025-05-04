@@ -3,9 +3,10 @@ package com.bcncgroup.inditex.application.service;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import com.bcncgroup.inditex.application.port.outbound.PriceRepository;
 import com.bcncgroup.inditex.domain.exception.PriceNotFoundException;
 import com.bcncgroup.inditex.domain.model.Price;
-import com.bcncgroup.inditex.domain.port.outbound.PriceRepository;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
