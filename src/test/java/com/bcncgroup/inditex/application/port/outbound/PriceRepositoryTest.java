@@ -1,7 +1,9 @@
-package com.bcncgroup.inditex.domain.port.outbound;
+package com.bcncgroup.inditex.application.port.outbound;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
+
+import com.bcncgroup.inditex.application.port.outbound.PriceRepository;
 import com.bcncgroup.inditex.domain.model.Price;
 import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;

@@ -1,4 +1,4 @@
-package com.bcncgroup.inditex.domain.port.outbound;
+package com.bcncgroup.inditex.application.port.outbound;
 
 import java.time.LocalDateTime;
 import java.util.List;
