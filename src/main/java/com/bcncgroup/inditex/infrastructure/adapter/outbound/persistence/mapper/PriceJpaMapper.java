@@ -7,6 +7,15 @@ import java.util.Currency;
 
 public class PriceJpaMapper {
 
+    private PriceJpaMapper() {
+        // Evita la instanciación
+    }
+    /**
+     * Convierte un objeto Price a PriceEntity.
+     *
+     * @param e El objeto Price a convertir.
+     * @return Un objeto PriceEntity con los datos del objeto Price.
+     */
     public static Price toDomain(PriceEntity e) {
         return new Price(
                 e.getId(),

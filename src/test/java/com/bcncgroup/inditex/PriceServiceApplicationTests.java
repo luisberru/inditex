@@ -8,6 +8,7 @@ class PriceServiceApplicationTests {
 
 	@Test
 	void contextLoads() {
+		// Este método se deja vacío intencionadamente para verificar que el contexto de Spring Boot carga correctamente.
 	}
 
 	@Test

@@ -1,0 +1,6 @@
+projectKey=BNCGroup-Inditex
+serverUrl=http://localhost:9000
+serverVersion=25.6.0.109173
+dashboardUrl=http://localhost:9000/dashboard?id=BNCGroup-Inditex
+ceTaskId=29494295-d43b-4888-b202-739792719ec4
+ceTaskUrl=http://localhost:9000/api/ce/task?id=29494295-d43b-4888-b202-739792719ec4
