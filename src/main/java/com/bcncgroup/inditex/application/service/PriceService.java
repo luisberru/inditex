@@ -31,7 +31,6 @@ public class PriceService implements GetPriceUseCase {
 				.max(Comparator.comparingInt(Price::priority));
 	}
 
-	// helper si prefieres lanzar excepción directamente
 	public Price getOrThrow(LocalDateTime date, Long productId, Long brandId) {
 		return findApplicable(date, productId, brandId).orElseThrow(() -> new PriceNotFoundException(
 				"No se encontró un precio para el producto %d de la marca %d en la fecha %s.".formatted(productId,
